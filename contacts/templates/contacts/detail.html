@@ -1,0 +1,9 @@
+<a href="{% url 'contacts:index' %}">Back</a>
+<h1>{{ contact.name }}</h1>
+<h2>Phone:</h2> {{ contact.phone }}
+<h2>Email:</h2> {{ contact.email }}
+<h2>Address Line 1:</h2> {{ contact.address_line_1 }}
+<h2>Address Line 2:</h2> {{ contact.address_line_2 }}
+<h2>City:</h2> {{ contact.city }}
+<h2>State:</h2> {{ contact.state }}
+<h2>Zipcode:</h2> {{ contact.zipcode }}
