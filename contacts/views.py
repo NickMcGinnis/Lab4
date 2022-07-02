@@ -1,30 +1,36 @@
-from multiprocessing import context
-from re import I, template
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-from django.template import loader
-from contacts.models import Contact, ContactForm
+from django.urls import reverse
+from django.views.generic import ListView, DetailView 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from contacts.models import Contact
 # Create your views here.
 
+class ContactList(ListView): 
+    model = Contact
+    template_name = 'contcts/contact_list.html'
 
-def index(request):
-    contacts_list = Contact.objects.order_by('-name')[:10]
-    context = {'contacts_list': contacts_list}
-    return render(request, 'contacts/index.html', context)
+class ContactDetail(DetailView):
+    model = Contact
+    template_name = 'contacts/contact_details.html'
 
+class ContactCreate(CreateView):
+    model = Contact
+    template_name = 'contacts/contact_form.html'
+    fields = '__all__'
+        
+    def get_success_url(self):
+        return reverse('contact_list')
 
-def detail(request, contact_id):
-    contact = get_object_or_404(Contact, pk=contact_id)
-    return render(request, 'contacts/detail.html', {'contact': contact})
+class ContactUpdate(UpdateView):
+    model = Contact
+    template_name = 'contacts/contact_form.html'
+    fields = '__all__'
 
+    def get_success_url(self):
+        return reverse('contact_list')
 
-def add(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/contacts')
-    else:
-        form = ContactForm
-
-    return render(request, 'contacts/add.html', {'form': form})
+class ContactDelete(DeleteView):
+    model = Contact
+    template_name = 'contacts/contact_confirm_delete.html'
+    
+    def get_success_url(self):
+        return reverse('contact_list')
