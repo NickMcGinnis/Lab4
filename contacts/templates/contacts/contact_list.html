@@ -1,29 +1,56 @@
-<h1>Contacts</h1>
-<a href="{% url 'contact_create' %}">Add</a>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Address</th>
-<th>Phone</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody>
-{% for contact in object_list %}
-<tr>
-<td>{{ contact.name }}</td>
-<td>{{ contact.email }}</td>
-<td>{{ contact.address }}</td>
-<td>{{ contact.phone }}</td>
-<td>
-<a  href="{% url "contact_detail"  contact.id  %}">details</a>
-<a  href="{% url "contact_update"  contact.id  %}">edit</a>
-<a  href="{% url "contact_delete"  contact.id  %}">delete</a>
-</td>
-</tr>
+<!DOCTYPE html>
+<html>
 
-{% endfor %}
-</tbody>
-</table>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contacts</title>
+</head>
+
+<body>
+    {% include "contacts/header.html" %}
+    <section class="section">
+        <div class="container">
+            <section class="hero">
+                <div class="hero-body">
+                    <p class="title">
+                        Contacts
+                    </p>
+                </div>
+            </section>
+            <button class="button is-primary"><a href="{% url 'contacts:contact_create' %}">Add</a></button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th title="Name">Name</th>
+                        <th title="Email">Email</th>
+                        <th title="Address">Address</th>
+                        <th title="Phone">Phone</th>
+                        <th title="Actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in object_list %}
+                    <tr>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.address }}</td>
+                        <td>{{ contact.phone }}</td>
+                        <td>
+                            <button class="button"><a
+                                    href="{% url 'contacts:contact_detail' contact.id %}">Details</a></button>
+                            <button class="button"><a
+                                    href="{% url 'contacts:contact_update' contact.id %}">Edit</a></button>
+                            <button class="button is-danger is-light"><a
+                                    href="{% url 'contacts:contact_delete' contact.id %}">Delete</a></button>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+
+</html>
