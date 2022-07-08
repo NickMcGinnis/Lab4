@@ -1,6 +1,6 @@
 # Run:
-`pip install -m virtualenv`
-`py -m venv env`
-`venv\Scripts\Activate.ps1`
-`pip install -r requirements.txt`
-`python manage.py runserver`
+1. `pip install -m virtualenv`
+2. `py -m venv env`
+3. `venv\Scripts\Activate.ps1`
+4. `pip install -r requirements.txt`
+5. `python manage.py runserver`
