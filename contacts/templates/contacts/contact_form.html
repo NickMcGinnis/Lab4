@@ -1,7 +1,26 @@
-<h1>Contact Update</h1>
+<!DOCTYPE html>
+<html>
 
-<form  method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input  type="submit"  value="Submit"  />
-</form>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contacts</title>
+</head>
+
+<body>
+    {% include "contacts/header.html" %}
+    <section class="section">
+        <div class="container">
+            <section class="hero">
+                <div class="hero-body">
+                    <p class="title">
+                        Contact
+                    </p>
+                </div>
+            </section>
+            {% load crispy_forms_tags %}
+            {% crispy form %}
+    </section>
+</body>
+
+</html>
